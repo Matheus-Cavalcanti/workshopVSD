@@ -1,0 +1,91 @@
+=== Português ===
+
+Passos e Conceitos Principais:
+
+    Organização dos Ficheiros:
+
+        O apresentador começa por navegar para a pasta que contém os ficheiros do projeto (verilog_files).
+
+        É explicada uma convenção de nomenclatura importante: para cada ficheiro de design (ex: good_mux.v), existe um ficheiro de "test bench" (banco de testes) correspondente com o prefixo TB_ (ex: TB_good_mux.v). Isto indica uma relação direta entre o circuito a ser testado e o código que o testa.
+
+    Compilação com Icarus Verilog:
+
+        O comando iverilog é usado no terminal para compilar o design e o seu test bench. O comando completo seria algo como: iverilog good_mux.v TB_good_mux.v.
+
+        Este processo de compilação cria um ficheiro executável, que por defeito se chama a.out.
+
+    Execução da Simulação:
+
+        Para correr a simulação, o ficheiro a.out é executado com o comando: ./a.out.
+
+        A execução deste ficheiro faz com que o test bench aplique os estímulos de teste ao design e, como resultado, gera um ficheiro VCD (Value Change Dump). Este ficheiro contém todos os dados da simulação.
+
+    Visualização com GTKWave:
+
+        Para analisar os resultados, o ficheiro VCD é aberto com o GTKWave usando o comando: gtkwave nome_do_ficheiro.vcd.
+
+        Dentro do GTKWave, o utilizador pode selecionar os sinais que deseja observar (entradas, saídas, sinais internos) e arrastá-los para a janela de formas de onda.
+
+    Análise das Formas de Onda:
+
+        O vídeo mostra como usar as ferramentas do GTKWave para analisar o comportamento do circuito:
+
+            Zoom: É possível usar o botão "Zoom Fit" para ver toda a duração da simulação ou selecionar uma área específica para uma análise mais detalhada.
+
+            Navegação: Existem botões para avançar e recuar para a próxima transição de sinal, o que é extremamente útil para depurar o design e verificar a lógica passo a passo.
+
+    Verificação do Exemplo (Multiplexador):
+
+        O apresentador usa um exemplo de um multiplexador (mux) para demonstrar o processo. Ao observar as formas de onda, ele verifica o funcionamento correto:
+
+            Quando a linha de seleção (select) está em 0, a saída (Y) segue o valor da entrada I0.
+
+            Quando a linha de seleção está em 1, a saída (Y) segue o valor da entrada I1.
+
+        Esta verificação visual confirma que o design do multiplexador está a funcionar conforme o esperado.
+
+=== Engilsh ===
+
+Key Steps and Concepts:
+
+    File Organization:
+
+        The presenter starts by navigating to the folder containing the project files (verilog_files).
+
+        An important naming convention is explained: for every design file (e.g., good_mux.v), there is a corresponding test bench file with the prefix TB_ (e.g., TB_good_mux.v). This indicates a direct relationship between the circuit under test and the code that tests it.
+
+    Compilation with Icarus Verilog:
+
+        The iverilog command is used in the terminal to compile the design and its test bench. The full command would be something like: iverilog good_mux.v TB_good_mux.v.
+
+        This compilation process creates an executable file, which is named a.out by default.
+
+    Running the Simulation:
+
+        To run the simulation, the a.out file is executed with the command: ./a.out.
+
+        Executing this file causes the test bench to apply the test stimuli to the design and, as a result, generates a VCD (Value Change Dump) file. This file contains all the simulation data.
+
+    Visualization with GTKWave:
+
+        To analyze the results, the VCD file is opened with GTKWave using the command: gtkwave filename.vcd.
+
+        Inside GTKWave, the user can select the signals they want to observe (inputs, outputs, internal signals) and drag them into the waveform window.
+
+    Waveform Analysis:
+
+        The video shows how to use GTKWave's tools to analyze the circuit's behavior:
+
+            Zoom: You can use the "Zoom Fit" button to see the entire simulation duration or select a specific area for a more detailed analysis.
+
+            Navigation: There are buttons to trace forward and backward to the next signal transition, which is extremely useful for debugging the design and checking the logic step-by-step.
+
+    Verification of the Example (Multiplexer):
+
+        The presenter uses an example of a multiplexer (mux) to demonstrate the process. By observing the waveforms, he verifies its correct functionality:
+
+            When the select line (select) is 0, the output (Y) follows the value of the input I0.
+
+            When the select line is 1, the output (Y) follows the value of the input I1.
+
+        This visual verification confirms that the multiplexer design is working as expected.
