@@ -1,0 +1,81 @@
+=== Português ===
+
+Design do Multiplexador (good_mux)
+
+    Módulo: O design é encapsulado em um módulo chamado good_mux.
+
+    Entradas e Saídas:
+
+        Entradas: i0, i1 (as duas entradas de dados) e sel (a linha de seleção).
+
+        Saída: y (a saída do multiplexador).
+
+    Lógica de Funcionamento:
+
+        Se o sinal sel (seleção) for alto (nível lógico 1), a saída y receberá o valor da entrada i1.
+
+        Se o sinal sel for baixo (nível lógico 0), a saída y receberá o valor da entrada i0.
+
+    Observação: O apresentador menciona que este é apenas um exemplo ilustrativo e que existem várias outras maneiras de se codificar um multiplexador em Verilog.
+
+Test Bench (tb_good_mux)
+
+    Propósito: O "test bench" é um módulo Verilog separado, criado com o único propósito de testar o design do good_mux.
+
+    Instanciação: Dentro do test bench, uma cópia (instância) do good_mux é criada. Essa instância é frequentemente chamada de UUT (Unit Under Test - Unidade Sob Teste) ou DUT (Design Under Test - Design Sob Teste).
+
+    Sem Entradas/Saídas Primárias: O módulo do test bench em si não possui portas de entrada ou saída. Ele é um ambiente de simulação autocontido.
+
+    Geração de Estímulos: O test bench é programado para gerar os sinais de teste que serão aplicados nas entradas do UUT.
+
+        No início da simulação, as entradas sel, i0, e i1 são inicializadas com o valor 0.
+
+        A simulação é configurada para durar 300 nanossegundos (este tempo pode ser ajustado).
+
+        A cada 75 nanossegundos, o valor da entrada sel é invertido (not of sel).
+
+        As entradas de dados i0 e i1 também são alternadas em diferentes momentos para criar uma variedade de cenários de teste.
+
+    Geração do Ficheiro VCD: O test bench inclui comandos para iniciar a gravação de um ficheiro VCD (Value Change Dump). Este ficheiro regista todas as mudanças de valor nos sinais ao longo da simulação, permitindo que o comportamento do UUT seja visualizado posteriormente com uma ferramenta como o GTKWave.
+
+Em resumo, a aula mostra como definir um multiplexador simples e, mais importante, como construir um ambiente de teste (test bench) para aplicar estímulos de forma automática ao design e gerar um ficheiro de saída (VCD) para a verificação visual dos resultados.
+
+=== Engilsh ===
+
+Multiplexer Design (good_mux)
+
+    Module: The design is encapsulated in a module named good_mux.
+
+    Inputs and Outputs:
+
+        Inputs: i0, i1 (the two data inputs) and sel (the select line).
+
+        Output: y (the output of the multiplexer).
+
+    Functional Logic:
+
+        If the sel (select) signal is high (logic level 1), the output y will receive the value of the input i1.
+
+        If the sel signal is low (logic level 0), the output y will receive the value of the input i0.
+
+    Note: The presenter mentions that this is just an illustrative example and that there are several other ways to code a multiplexer in Verilog.
+
+Test Bench (tb_good_mux)
+
+    Purpose: The test bench is a separate Verilog module created for the sole purpose of testing the good_mux design.
+
+    Instantiation: Inside the test bench, a copy (instance) of the good_mux is created. This instance is often referred to as UUT (Unit Under Test) or DUT (Design Under Test).
+
+    No Primary Inputs/Outputs: The test bench module itself does not have any input or output ports. It is a self-contained simulation environment.
+
+    Stimulus Generation: The test bench is programmed to generate the test signals that will be applied to the UUT's inputs.
+
+        At the beginning of the simulation, the inputs sel, i0, and i1 are initialized to 0.
+
+        The simulation is set to run for 300 nanoseconds (this time can be adjusted).
+
+        Every 75 nanoseconds, the value of the sel input is toggled (not of sel).
+
+        The data inputs i0 and i1 are also toggled at different times to create a variety of test scenarios.
+
+    VCD File Generation: The test bench includes commands to start recording a VCD (Value Change Dump) file. This file logs all value changes on the signals throughout the simulation, allowing the UUT's behavior to be visualized later with a tool like GTKWave.
