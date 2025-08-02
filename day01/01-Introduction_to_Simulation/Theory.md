@@ -1,37 +1,37 @@
-# Conceitos Fundamentais
+# Fundamental Concepts
 
-## Simulador
+## Simulator
 
-* **O que é?** Um simulador é um programa de software que imita o comportamento de um circuito digital descrito em uma linguagem como Verilog. Sua principal função é verificar se o design (o código do circuito) atende às especificações funcionais.
+* **What is it?** A simulator is a software program that mimics the behavior of a digital circuit described in a language like Verilog. Its main function is to verify if the design (the circuit's code) meets the functional specifications.
 
-* **Como funciona?** O simulador monitora constantemente os sinais de entrada do seu design. Sempre que um sinal de entrada muda de valor (por exemplo, de 0 para 1), o simulador recalcula as saídas correspondentes com base na lógica descrita no seu código. Se as entradas não mudam, as saídas permanecem estáveis.
+* **How does it work?** The simulator constantly monitors the input signals of your design. Whenever an input signal changes its value (e.g., from 0 to 1), the simulator recalculates the corresponding outputs based on the logic described in your code. If the inputs do not change, the outputs remain stable.
 
-* **Ferramenta utilizada:** Iverilog, que é um simulador de Verilog de código aberto e amplamente utilizado.
+* **Tool used:** Icarus Verilog (often referred to as iverilog), which is a widely used, open-source Verilog simulator.
 
 ## Design (RTL - Register-Transfer Level)
 
-* **O que é?** O "design" é o próprio código Verilog que descreve a funcionalidade do circuito que você está a criar. Ele pode consistir em um ou vários arquivos Verilog que, juntos, implementam a lógica desejada (por exemplo, um somador, um processador, etc.).
+* **What is it?** The "design" is the Verilog code itself that describes the functionality of the circuit you are creating. It can consist of one or more Verilog files that, together, implement the desired logic (e.g., an adder, a processor, etc.).
 
-* **Nível de Abstração:** O código é escrito no nível de transferência de registros (RTL), que descreve como os dados se movem entre os registros de armazenamento (como flip-flops) e através da lógica combinacional.
+* **Level of Abstraction:** The code is written at the register-transfer level (RTL), which describes how data moves between storage registers (like flip-flops) and through combinational logic.
 
 ## Test Bench
 
-* **O que é?** Um "test bench" é um ambiente de teste, também escrito em Verilog, criado especificamente para verificar o seu design. Ele não faz parte do circuito final, mas é crucial para a simulação.
+* **What is it?** A "test bench" is a testing environment, also written in Verilog, created specifically to verify your design. It is not part of the final circuit, but it is crucial for simulation.
 
-* **Qual a sua função?** A principal função do test bench é gerar e aplicar um conjunto de estímulos (chamados de "vetores de teste") às entradas do seu design. Depois, ele pode (opcionalmente) verificar se as saídas produzidas pelo design correspondem aos resultados esperados.
- 
-* **Estrutura:** Um test bench instancia (cria uma cópia) do design que se quer testar dentro dele. É importante notar que, ao contrário do design, o test bench em si não possui portas de entrada ou saída externas; ele é um ambiente de simulação autocontido.
+* **What is its function?** The main function of the test bench is to generate and apply a set of stimuli (called "test vectors") to the inputs of your design. Afterward, it can (optionally) check if the outputs produced by the design match the expected results.
 
-### O Fluxo de Simulação com Iverilog
+* **Structure:** A test bench instantiates (creates a copy of) the design to be tested within itself. It is important to note that, unlike the design, the test bench itself has no external input or output ports; it is a self-contained simulation environment.
 
-O processo prático de simulação segue estes passos:
+### The Simulation Flow with Icarus Verilog
 
-1. **Entrada:** Você fornece dois conjuntos de arquivos para o simulador Iverilog:
-    * Os arquivos do Design (o seu circuito em Verilog).
-    * O arquivo do Test Bench (o código que testará o seu design).
+The practical simulation process follows these steps:
 
-2. **Simulação:** O Iverilog compila e executa o test bench. O test bench, por sua vez, aplica os estímulos ao design.
+1.  **Input:** You provide two sets of files to the Icarus Verilog simulator:
+    * The Design files (your circuit in Verilog).
+    * The Test Bench file (the code that will test your design).
 
-3. **Saída:** O resultado da simulação é um arquivo chamado VCD (Value Change Dump). Este arquivo é um registro detalhado de todas as mudanças de valor (0 para 1, 1 para 0, etc.) em todos os sinais (entradas, saídas e sinais internos) do seu design ao longo do tempo de simulação.
+2.  **Simulation:** Icarus Verilog compiles and runs the test bench. The test bench, in turn, applies the stimuli to the design.
 
-4. **Visualização e Verificação:** Para analisar os resultados, você utiliza uma ferramenta de visualização de formas de onda, como o GTKWave. Ao abrir o arquivo VCD no GTKWave, você pode ver graficamente as formas de onda de todos os sinais, permitindo verificar visualmente se o seu design se comportou como esperado em resposta aos estímulos do test bench.
+3.  **Output:** The result of the simulation is a file called a VCD (Value Change Dump). This file is a detailed record of all value changes (0 to 1, 1 to 0, etc.) in all signals (inputs, outputs, and internal signals) of your design throughout the simulation time.
+
+4.  **Visualization and Verification:** To analyze the results, you use a waveform viewer tool, such as GTKWave. By opening the VCD file in GTKWave, you can graphically see the waveforms of all signals, allowing you to visually verify if your design behaved as expected in response to the stimuli from the test bench.

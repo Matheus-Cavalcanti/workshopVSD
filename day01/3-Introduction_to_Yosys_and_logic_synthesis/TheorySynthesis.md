@@ -1,37 +1,37 @@
-# Conceitos Fundamentais
+# Fundamental Concepts
 
-## O Design (RTL - Register-Transfer Level)
+## The Design (RTL - Register-Transfer Level)
 
-* **O que é?** O design RTL é o código-fonte do seu circuito, geralmente escrito em uma linguagem como Verilog. Ele descreve o **comportamento** do circuito — o que ele deve fazer — em um nível de abstração que foca na transferência de dados entre registros (como flip-flops) e na lógica combinacional entre eles.
+* **What is it?** The RTL design is the source code of your circuit, usually written in a language like Verilog. It describes the **behavior** of the circuit—what it should do—at a level of abstraction that focuses on the transfer of data between registers (like flip-flops) and the combinational logic between them.
 
-* **Abstração vs. Realidade:** É importante entender que o código RTL é apenas uma descrição funcional. Ele não especifica quais portas lógicas exatas serão usadas ou como elas serão conectadas.
+* **Abstraction vs. Reality:** It's important to understand that the RTL code is just a functional description. It does not specify which exact logic gates will be used or how they will be connected.
 
-## A Síntese Lógica
+## Logic Synthesis
 
-* **O que é?** A síntese lógica é o processo automatizado de traduzir o design RTL (abstrato) em uma **netlist** (concreta).
+* **What is it?** Logic synthesis is the automated process of translating the abstract RTL design into a concrete **netlist**.
 
-* **O que é uma Netlist?** A netlist é uma descrição do mesmo circuito, mas agora em termos de instâncias de portas lógicas específicas (AND, OR, NOT, flip-flops, etc.) e as conexões (fios) entre elas. Essencialmente, é a "receita" de como construir o circuito usando componentes básicos.
+* **What is a Netlist?** The netlist is a description of the same circuit, but now in terms of instances of specific logic gates (AND, OR, NOT, flip-flops, etc.) and the connections (wires) between them. Essentially, it's the "recipe" for how to build the circuit using basic components.
 
-## A Biblioteca de Células Padrão (arquivo .lib)
+## The Standard Cell Library (.lib file)
 
-* **O que é?** Para realizar a síntese, a ferramenta precisa saber quais "peças" ela tem disponíveis para construir o circuito. Essa informação está contida no arquivo de biblioteca (`.lib`). É uma coleção de todas as células lógicas (portas, flip-flops, etc.) fornecidas por uma determinada tecnologia de fabricação.
+* **What is it?** To perform synthesis, the tool needs to know what "parts" it has available to build the circuit. This information is contained in the library file (`.lib`). It is a collection of all the logic cells (gates, flip-flops, etc.) provided by a specific fabrication technology.
 
-* **"Tipos" de Células:** Uma biblioteca não contém apenas uma versão de cada porta. Ela oferece múltiplos **"tipos"** ou variações, por exemplo:
-  * Portas AND com 2, 3 ou 4 entradas.
-  * Cada uma dessas portas pode ter versões com diferentes características de desempenho (lenta, média, rápida).
+* **"Types" of Cells:** A library doesn't just contain one version of each gate. It offers multiple **"types"** or variations, for example:
+  * AND gates with 2, 3, or 4 inputs.
+  * Each of these gates may have versions with different performance characteristics (slow, medium, fast).
 
-## A Importância do Tempo (Timing) e dos "Tipos" das Células
+## The Importance of Timing and Cell "Types"
 
-A razão para haver tantas variações de células está ligada ao **timing closure**, um dos maiores desafios no design de chips. O objetivo é garantir que o circuito funcione na frequência de clock desejada.
+The reason for having so many cell variations is linked to **timing closure**, one of the biggest challenges in chip design. The goal is to ensure the circuit works at the desired clock frequency.
 
-## Análise de Tempo de Setup (Setup Timing)
+## Setup Timing Analysis
 
-* **O Desafio:** Para que um dado seja capturado corretamente por um flip-flop, ele deve chegar à sua entrada e permanecer estável por um certo tempo **antes** da borda de subida do clock. Esse é o **tempo de setup**.
-* **A Equação Crítica:** `Período do Clock > Atraso do Flip-Flop de Origem + Atraso da Lógica Combinacional + Tempo de Setup do Flip-Flop de Destino`.
-* **Otimização:** Para aumentar a frequência do clock (diminuir o período), o **atraso da lógica combinacional** entre os flip-flops deve ser o menor possível.
-* **Solução:** A ferramenta de síntese escolhe **células rápidas** da biblioteca para os caminhos lógicos críticos (os mais lentos) para minimizar esse atraso e atender à restrição de setup.
+* For data to be correctly captured by a flip-flop, it must arrive at its input and remain stable for a certain amount of time **before** the rising edge of the clock. This is the **setup time**.
+* **Equation:** `Clock Period > Source Flip-Flop Delay + Combinational Logic Delay + Destination Flip-Flop Setup Time`.
+* **Optimization:** To increase the clock frequency (decrease the period), the **combinational logic delay** between the flip-flops must be as small as possible.
+* **Solution:** The synthesis tool chooses **fast cells** from the library for the critical logic paths (the slowest ones) to minimize this delay and meet the setup constraint.
 
-## Análise de Tempo de Hold (Hold Timing)
+## Hold Timing Analysis
 
-* **O Desafio:** O dado na entrada de um flip-flop também deve permanecer estável por um certo tempo **depois** da borda do clock. Esse é o **tempo de hold**. Se o novo dado chegar rápido demais, ele pode corromper o dado atual antes que ele seja capturado.
-* **Solução:** Paradoxalmente, para corrigir violações de hold, a ferramenta de síntese precisa **aumentar o atraso** no caminho do dado. Para isso, ela seleciona **células lentas** da biblioteca e as insere no caminho para "atrasar" a chegada do sinal.
+* The data at the input of a flip-flop must also remain stable for a certain amount of time **after** the clock edge. This is the **hold time**. If the new data arrives too quickly, it can corrupt the current data before it is captured.
+* **Solution:** Paradoxically, to fix hold violations, the synthesis tool needs to **increase the delay** in the data path. To do this, it selects **slow cells** from the library and inserts them into the path to "delay" the signal's arrival.

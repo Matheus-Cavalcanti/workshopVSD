@@ -1,34 +1,34 @@
-# Conceitos Fundamentais
+# Fundamental Concepts
 
-## O que é um Sintetizador?
+## What is a Synthesizer?
 
-* **Definição:** Um sintetizador é uma ferramenta de software que traduz o código RTL (Register-Transfer Level), que descreve o comportamento de um circuito, em uma "netlist".
+* **Definition:** A synthesizer is a software tool that translates RTL (Register-Transfer Level) code, which describes the behavior of a circuit, into a "netlist".
 
-* **Netlist:** A netlist é uma descrição do circuito em termos de portas lógicas e células padrão (como AND, OR, NOT, flip-flops) que estão disponíveis em uma biblioteca de tecnologia específica.
+* **Netlist:** The netlist is a description of the circuit in terms of logic gates and standard cells (like AND, OR, NOT, flip-flops) that are available in a specific technology library.
 
 ## Yosys
 
-* **Ferramenta utilizada:** Uitlizaremos o Yosys, um popular sintetizador de código aberto, para realizar essa conversão.
+* **Tool used:** We will use Yosys, a popular open-source synthesizer, to perform this conversion.
 
-### O Fluxo de Síntese com Yosys
+### The Synthesis Flow with Yosys
 
-O processo de síntese com o Yosys envolve os seguintes passos:
+The synthesis process with Yosys involves the following steps:
 
-1. **Entradas:** O Yosys requer duas entradas principais:
-    * **O Design (RTL):** O código Verilog que descreve o seu circuito.
-    * **A Biblioteca de Células Padrão (arquivo .lib):** Um arquivo que descreve as características (função, tempo, etc.) das células lógicas básicas que podem ser usadas para construir o circuito.
+1.  **Inputs:** Yosys requires two main inputs:
+    * **The Design (RTL):** The Verilog code that describes your circuit.
+    * **The Standard Cell Library (.lib file):** A file that describes the characteristics (function, timing, etc.) of the basic logic cells that can be used to build the circuit.
 
-2. **Processo de Síntese:** O Yosys processa o design RTL e o mapeia para as células disponíveis na biblioteca.
+2.  **Synthesis Process:** Yosys processes the RTL design and maps it to the cells available in the library.
 
-3. **Saída:** A saída do Yosys é um arquivo de **netlist**, também em formato Verilog. Esta netlist é funcionalmente equivalente ao RTL original, mas agora é descrita em termos de portas lógicas concretas da biblioteca.
+3.  **Output:** The output of Yosys is a **netlist** file, also in Verilog format. This netlist is functionally equivalent to the original RTL, but it is now described in terms of concrete logic gates from the library.
 
-### Verificação Pós-Síntese (Verificação de Equivalência Lógica)
+### Post-Synthesis Verification (Logic Equivalence Checking)
 
-Depois de gerar a netlist, é crucial verificar se ela se comporta exatamente como o RTL original. Como a netlist sintetizada mantém as mesmas entradas e saídas primárias que o design RTL, o mesmo test bench usado para simular o RTL pode ser reutilizado para simular a netlist.
+After generating the netlist, it is crucial to verify that it behaves exactly like the original RTL. Since the synthesized netlist maintains the same primary inputs and outputs as the RTL design, the same test bench used to simulate the RTL can be reused to simulate the netlist.
 
-* **Fluxo de Verificação:**
-    1. A **netlist** e o **test bench** são fornecidos ao simulador IVerilog (`iverilog`).
-    2. O `iverilog` executa a simulação e gera um arquivo **VCD (Value Change Dump)**.
-    3. Este arquivo VCD é visualizado no **GTKWave**.
-  
-* **Critério de Sucesso:** A síntese é considerada correta se as formas de onda observadas no GTKWave para a simulação da netlist forem idênticas às formas de onda da simulação do RTL original, para o mesmo conjunto de estímulos.
+* **Verification Flow:**
+    1.  The **netlist** and the **test bench** are provided to the IVerilog simulator (`iverilog`).
+    2.  `iverilog` runs the simulation and generates a **VCD (Value Change Dump)** file.
+    3.  This VCD file is viewed in **GTKWave**.
+
+* **Success Criterion:** The synthesis is considered correct if the waveforms observed in GTKWave for the netlist simulation are identical to the waveforms from the original RTL simulation, for the same set of stimuli.
